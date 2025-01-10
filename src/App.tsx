@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
 import { invoke } from '@tauri-apps/api/core';
 import Nav from './component/Nav';
 import { useSystemTheme } from './hooks/useSystemTheme';
@@ -19,7 +18,7 @@ function App() {
 
   return (
     <ThemeProvider theme={prefersDarkMode ? darkTheme : lightTheme}>
-      <div>
+      <div >
         <form
           className="row"
           onSubmit={(e) => {
@@ -32,7 +31,7 @@ function App() {
             onChange={(e) => setName(e.currentTarget.value)}
             placeholder="Enter a name..."
           />
-          <button type="submit">Greet</button>
+          <button>Greet</button>
         </form>
         <p>{greetMsg}</p>
         <Nav />

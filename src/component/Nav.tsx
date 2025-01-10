@@ -16,7 +16,9 @@ const Nav = () => {
       <BottomNavigation
         showLabels
         value={value}
-
+        sx={{
+          bgcolor: (theme) => theme.palette.mode === 'dark' ? '#323232' : '#f6f6f6',
+        }}
         onChange={(_event, newValue) => {
           setValue(newValue);
         }}
