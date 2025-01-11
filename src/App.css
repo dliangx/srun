@@ -10,7 +10,7 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
+  margin-bottom: 56px;
   color: #0f0f0f;
   background-color: #f6f6f6;
 
@@ -22,12 +22,17 @@
 }
 
 .container {
-  margin: 0;
-  padding-top: 10vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  /* 绝对定位，进行内部滚动 */
+  position: absolute;
+  top: 0;
+  bottom: 2rem;
+  right: 0;
+  left: 0;
+  padding: 1rem;
+  /* 使之可以滚动 */
+  overflow-y: scroll;
+  /* 增加该属性，可以增加弹性 */
+  -webkit-overflow-scrolling: touch;
 }
 
 .logo {
@@ -73,7 +78,6 @@ input {
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
-
 input {
   outline: none;
 }
@@ -85,7 +89,7 @@ input {
 @media (prefers-color-scheme: dark) {
   :root {
     color: #f6f6f6;
-    background-color: #323232;
+    background-color: #222222;
   }
 
   a:hover {
@@ -96,5 +100,4 @@ input {
     color: #ffffff;
     background-color: #0f0f0f;
   }
-
 }

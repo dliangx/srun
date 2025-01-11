@@ -10,14 +10,22 @@ const Nav = () => {
 
   return (
     <Paper
-      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
-      elevation={3}
+      sx={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '56px',
+        zIndex: 1000,
+      }}
+      elevation={9}
     >
       <BottomNavigation
         showLabels
         value={value}
         sx={{
-          bgcolor: (theme) => theme.palette.mode === 'dark' ? '#323232' : '#f6f6f6',
+          bgcolor: (theme) =>
+            theme.palette.mode === 'dark' ? '#222222' : '#f6f6f6',
         }}
         onChange={(_event, newValue) => {
           setValue(newValue);
