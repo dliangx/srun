@@ -43,8 +43,9 @@ function App() {
             <Route path="/chat/:id" element={<ChatDetail />} />
             <Route path="/user" element={<User />} />
             <Route path="/login" element={<Login />} />
+
           </Routes>
-          <Nav />
+          
         </BrowserRouter>
       </ThemeProvider>
     </AppContext.Provider>
