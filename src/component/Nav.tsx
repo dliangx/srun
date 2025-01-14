@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import BlurOnIcon from '@mui/icons-material/BlurOn';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import TelegramIcon from '@mui/icons-material/Telegram';
+import { AppContext } from '../App';
+import { useNavigate } from 'react-router';
 
 const Nav = () => {
-  const [value, setValue] = React.useState(0);
-
+  const { navIndex, setNavIndex } = useContext(AppContext);
+  const navigate = useNavigate();
   return (
     <Paper
       sx={{
@@ -22,13 +24,30 @@ const Nav = () => {
     >
       <BottomNavigation
         showLabels
-        value={value}
+        value={navIndex}
         sx={{
           bgcolor: (theme) =>
             theme.palette.mode === 'dark' ? '#222222' : '#f6f6f6',
         }}
         onChange={(_event, newValue) => {
-          setValue(newValue);
+          setNavIndex(newValue);
+          console.log(newValue);
+          switch (newValue) {
+            case 0:
+              navigate('/');
+              break;
+            case 1:
+              navigate('/running');
+              break;
+            case 2:
+              navigate('/chat');
+              break;
+            case 3:
+              navigate('/user');
+              break;
+            default:
+              break;
+          }
         }}
       >
         <BottomNavigationAction label="social" icon={<BlurOnIcon />} />
