@@ -3,7 +3,6 @@ import Nav from '../component/Nav';
 
 const Runing = () => {
   return (
-    <div>
     <div className="container" >
       <Menu />
       <p>
@@ -62,10 +61,9 @@ const Runing = () => {
         bootstrappers).
       </p>
       
-      
+      <Nav />
     </div>
-    <Nav />
-    </div>
+
   );
 };
 
