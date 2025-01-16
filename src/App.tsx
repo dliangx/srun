@@ -1,4 +1,3 @@
-import Nav from './component/Nav';
 import { useSystemTheme } from './hooks/useSystemTheme';
 import { ThemeProvider } from '@mui/material';
 import { darkTheme, lightTheme } from './theme';

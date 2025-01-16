@@ -1,9 +1,9 @@
 import  { useContext } from 'react';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
-import BlurOnIcon from '@mui/icons-material/BlurOn';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import TelegramIcon from '@mui/icons-material/Telegram';
+import FitbitIcon from '@mui/icons-material/Fitbit';
 import { AppContext } from '../App';
 import { useNavigate } from 'react-router';
 
@@ -17,18 +17,22 @@ const Nav = () => {
         bottom: 0,
         left: 0,
         right: 0,
-        height: '56px',
         zIndex: 1000,
+
+        top: 'calc(100vh - 136px)',
+        height: 122,
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgb(0,0,0,0.9)' : 'rgb(255,255,255,0.9)'),
       }}
-      elevation={9}
+      elevation={3}
     >
       <BottomNavigation
         showLabels
         value={navIndex}
         sx={{
           bgcolor: (theme) =>
-            theme.palette.mode === 'dark' ? '#222222' : '#f6f6f6',
+            theme.palette.mode === 'dark' ? '#1D1D1D' : '#f6f6f6',
         }}
+
         onChange={(_event, newValue) => {
           setNavIndex(newValue);
           console.log(newValue);
@@ -50,10 +54,10 @@ const Nav = () => {
           }
         }}
       >
-        <BottomNavigationAction label="social" icon={<BlurOnIcon />} />
-        <BottomNavigationAction label="running" icon={<DirectionsRunIcon />} />
-        <BottomNavigationAction label="chat" icon={<TelegramIcon />} />
-        <BottomNavigationAction label="user" icon={<PermIdentityIcon />} />
+        <BottomNavigationAction label="Event" icon={<EmojiEventsIcon />} />
+        <BottomNavigationAction label="Exercise" icon={<FitbitIcon />} />
+        <BottomNavigationAction label="Chat" icon={<TelegramIcon />} />
+        <BottomNavigationAction label="User" icon={<PermIdentityIcon />} />
       </BottomNavigation>
     </Paper>
   );

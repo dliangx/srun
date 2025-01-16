@@ -13,7 +13,7 @@ const User = () => {
   }
   return (
     <div>
-      <Container className="container">
+      <Container className="content">
         <form
           className="row"
           onSubmit={(e) => {

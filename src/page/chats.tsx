@@ -1,7 +1,7 @@
 import Nav from "../component/Nav";
 
 const Chats = () => {
-    return <div>Chats<Nav /></div>;
+    return <div className="content">Chats<Nav /></div>;
   };
   
   export default Chats;
