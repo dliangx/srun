@@ -37,8 +37,7 @@
   top: 0;
   right: 0;
   left: 0;
-  height: 85vh;
-
+  bottom: 0;
   /* 使之可以滚动 */
   overflow-y: scroll;
   /* 增加该属性，可以增加弹性 */

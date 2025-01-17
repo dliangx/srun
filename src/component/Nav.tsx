@@ -19,8 +19,8 @@ const Nav = () => {
         right: 0,
         zIndex: 1000,
 
-        top: 'calc(100vh - 136px)',
-        height: 122,
+        top: 'calc(100vh - 138px)',
+
         bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgb(0,0,0,0.9)' : 'rgb(255,255,255,0.9)'),
       }}
       elevation={3}
