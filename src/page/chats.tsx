@@ -4,7 +4,7 @@ import Nav from '../component/Nav';
 const Chats = () => {
   return (
     <div>
-      <Container className="content">
+      <Container className="container">
         Chats
         <p>
           We have some exciting news to share! IPFS (opens new window)and libp2p

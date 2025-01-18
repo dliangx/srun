@@ -23,24 +23,14 @@
 
 .container {
   /* 绝对定位，进行内部滚动 */
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  /* 使之可以滚动 */
-  overflow-y: scroll;
-}
-
-.content {
-  /* 绝对定位，进行内部滚动 */
   position: absolute;
   top: 0;
+  bottom: 0;
   right: 0;
   left: 0;
-  bottom: 0;
+  margin-bottom: 56px;
   /* 使之可以滚动 */
   overflow-y: scroll;
-  /* 增加该属性，可以增加弹性 */
   -webkit-overflow-scrolling: touch;
 }
 

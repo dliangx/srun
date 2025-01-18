@@ -1,7 +1,7 @@
 import  { useContext } from 'react';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import FitbitIcon from '@mui/icons-material/Fitbit';
 import { AppContext } from '../App';
@@ -18,10 +18,6 @@ const Nav = () => {
         left: 0,
         right: 0,
         zIndex: 1000,
-
-        top: 'calc(100vh - 146px)',
-
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? 'rgb(0,0,0,0.9)' : 'rgb(255,255,255,0.9)'),
       }}
       elevation={3}
     >
@@ -54,8 +50,8 @@ const Nav = () => {
           }
         }}
       >
-        <BottomNavigationAction label="Event" icon={<EmojiEventsIcon />} />
-        <BottomNavigationAction label="Exercise" icon={<FitbitIcon />} />
+        <BottomNavigationAction label="Home" icon={<FitbitIcon />} />
+        <BottomNavigationAction label="Run" icon={<DirectionsRunIcon />} />
         <BottomNavigationAction label="Chat" icon={<TelegramIcon />} />
         <BottomNavigationAction label="User" icon={<PermIdentityIcon />} />
       </BottomNavigation>
