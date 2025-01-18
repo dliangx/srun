@@ -9,7 +9,11 @@
     "core:default",
     "opener:default",
     "core:webview:default",
-    "http:default"
+    "http:default",
+    "geolocation:allow-check-permissions",
+    "geolocation:allow-request-permissions",
+    "geolocation:allow-get-current-position",
+    "geolocation:allow-watch-position"
   ],
   "remote": {
     "urls": [

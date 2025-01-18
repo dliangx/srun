@@ -687,6 +687,13 @@
     "@tauri-apps/cli-win32-ia32-msvc" "2.2.2"
     "@tauri-apps/cli-win32-x64-msvc" "2.2.2"
 
+"@tauri-apps/plugin-geolocation@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.npmmirror.com/@tauri-apps/plugin-geolocation/-/plugin-geolocation-2.2.2.tgz#ff2b7632bf1220f3408ab725154a773c51ca680b"
+  integrity sha512-f2FTJwzbfN2ylvJXj2BTuruJCKr2NO/Egjctr3O7+cHMYrs2YPoFyyR3LUEti8s/DkXdPReNplKJw4tYcMazKA==
+  dependencies:
+    "@tauri-apps/api" "^2.0.0"
+
 "@tauri-apps/plugin-http@~2":
   version "2.2.0"
   resolved "https://registry.npmmirror.com/@tauri-apps/plugin-http/-/plugin-http-2.2.0.tgz#c1d7bdd2838bdb2d13d0d3eb895f2cf4f10b2754"
