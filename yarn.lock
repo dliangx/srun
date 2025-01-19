@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@amap/amap-jsapi-loader@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/@amap/amap-jsapi-loader/-/amap-jsapi-loader-1.0.1.tgz#9ec4b4d5d2467eac451f6c852e35db69e9f9f0c0"
+  integrity sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==
+
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"
   resolved "https://registry.npmmirror.com/@ampproject/remapping/-/remapping-2.3.0.tgz"
@@ -707,6 +712,11 @@
   integrity sha512-E/XIHKqGV+FT8PDdkfMETmgPUxcR79Rk8USuzbadD/ZdvsKCfQR5q+6rpZC9zEnG2wzi9lVQM4D3xwrtGGIB8A==
   dependencies:
     "@tauri-apps/api" "^2.0.0"
+
+"@types/amap-js-api@^1.4.16":
+  version "1.4.16"
+  resolved "https://registry.npmmirror.com/@types/amap-js-api/-/amap-js-api-1.4.16.tgz#12cd7989f337bfa04ae37f54c3e80ee70d083f55"
+  integrity sha512-gfcEswuU4GNRdGAh74FhxfLlU6qxmVIJYPf3HV0uKucCWQ9iSr8TonDhqBvHVmmQEY60K+UAeIh0YLwKo/jpFQ==
 
 "@types/babel__core@^7.20.5":
   version "7.20.5"
