@@ -5,6 +5,7 @@ import {
   requestPermissions,
   getCurrentPosition,
   watchPosition,
+  Position,
 } from '@tauri-apps/plugin-geolocation';
 
 let permissions = await checkPermissions();
@@ -15,55 +16,63 @@ if (
   permissions = await requestPermissions(['location']);
 }
 
-
-
-if (permissions.location === 'granted') {
-  const pos = await getCurrentPosition();
-  console.log(pos);
-
-  await watchPosition(
-    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
-    (pos) => {
-      console.log(pos);
-    }
-  );
-}
-
 const MMap = () => {
   const [map, setMap] = React.useState<AMap.Map | null>(null);
   const mapContainer = useRef(null);
+  const [pos, setPos] = React.useState<Position | null>(null);
+
+  async function getPos() {
+    if (permissions.location === 'granted') {
+      let pos = await getCurrentPosition();
+      console.log(pos);
+
+      setPos(pos);
+      await watchPosition(
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
+        async (pos) => {
+          console.log(pos);
+          map?.getSize();
+        }
+      );
+    }
+  }
 
   useEffect(() => {
     AMapLoader.load({
       key: '0f012d1d7b59235920991711ee67ddd6',
       version: '2.0',
-      plugins: [],
+      plugins: ['AMap.ConvertCoord'],
     })
       .then((AMap) => {
         const map = new AMap.Map(mapContainer.current, {
-          zoom: 3.5,
+          zoom: 17,
           expandZoomRange: true,
           zooms: [3, 21],
-          center: [116.397428, 39.90923],
+          center: [pos?.coords.longitude, pos?.coords.latitude],
         });
-
+        
         setMap(map);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [pos]);
 
   useEffect(() => {
-    if (map) {
-      map.on('click', (e) => {
-        console.log(e);
-      });
-    }
-  });
+    getPos();
+  }, []);
 
   return (
-    <div ref={mapContainer} style={{ width: '100%', height: '100%' }}></div>
+    <div ref={mapContainer} style={{ width: '100%', height: '100%' }}>
+      {pos && (
+        <div
+          style={{ position: 'absolute', bottom: 0, right: 0, zIndex: 1001 }}
+        >
+          <p>Latitude: {pos.coords.latitude}</p>
+          <p>Longitude: {pos.coords.longitude}</p>
+        </div>
+      )}
+    </div>
   );
 };
 
