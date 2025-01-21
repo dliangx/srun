@@ -21,17 +21,43 @@ const MMap = () => {
   const mapContainer = useRef(null);
   const [pos, setPos] = React.useState<Position | null>(null);
 
+  async function convertGPSToAMapCoords(lng: number, lat: number) {
+    return new Promise<[ lng: number, lat: number ]>((resolve, reject) => {
+      AMap.convertFrom([lng, lat], 'gps', (status: string, result: any) => {
+        if (status === 'complete' && result.info === 'ok') {
+          const { lng, lat } = result.locations[0];
+          resolve([ lng, lat ]);
+        } else {
+          reject(
+            new Error('Failed to convert GPS coordinates to AMap coordinates')
+          );
+        }
+      });
+    });
+  }
+
   async function getPos() {
     if (permissions.location === 'granted') {
       let pos = await getCurrentPosition();
       console.log(pos);
-
+      map?.setFitView([
+        new AMap.Marker({
+          position: [pos.coords.longitude, pos.coords.latitude],
+        }),
+      ]);
       setPos(pos);
       await watchPosition(
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
         async (pos) => {
           console.log(pos);
-          map?.getSize();
+          if (pos) {
+            map?.setFitView([
+              new AMap.Marker({
+                position: [pos.coords.longitude, pos.coords.latitude],
+              }),
+            ]);
+            setPos(pos);
+          }
         }
       );
     }
@@ -45,22 +71,24 @@ const MMap = () => {
     })
       .then((AMap) => {
         const map = new AMap.Map(mapContainer.current, {
-          zoom: 17,
+          zoom: 19,
           expandZoomRange: true,
           zooms: [3, 21],
-          center: [pos?.coords.longitude, pos?.coords.latitude],
+          center: [114.305393, 30.593099], // Wuhan GPS coordinates
         });
-        
+
         setMap(map);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, [pos]);
+  }, []);
 
   useEffect(() => {
-    getPos();
-  }, []);
+    if (map) {
+      getPos();
+    }
+  }, [map]);
 
   return (
     <div ref={mapContainer} style={{ width: '100%', height: '100%' }}>
