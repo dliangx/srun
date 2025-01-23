@@ -15,7 +15,7 @@ import {
   
   if (permissions.location === 'granted') {
     const pos = await getCurrentPosition()
-  
+    console.log(pos)
     await watchPosition(
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
       (pos) => {

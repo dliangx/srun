@@ -8,13 +8,6 @@ import {
   Position,
 } from '@tauri-apps/plugin-geolocation';
 
-let permissions = await checkPermissions();
-if (
-  permissions.location === 'prompt' ||
-  permissions.location === 'prompt-with-rationale'
-) {
-  permissions = await requestPermissions(['location']);
-}
 
 const MMap = () => {
   const [map, setMap] = React.useState<AMap.Map | null>(null);
@@ -37,6 +30,13 @@ const MMap = () => {
   }
 
   async function getPos() {
+    let permissions = await checkPermissions();
+    if (
+      permissions.location === 'prompt' ||
+      permissions.location === 'prompt-with-rationale'
+    ) {
+      permissions = await requestPermissions(['location']);
+    }
     if (permissions.location === 'granted') {
       let pos = await getCurrentPosition();
       console.log(pos);
@@ -51,6 +51,8 @@ const MMap = () => {
         async (pos) => {
           console.log(pos);
           if (pos) {
+            const transPos = convertGPSToAMapCoords(pos.coords.longitude,pos.coords.latitude)
+            console.log(transPos)
             map?.setFitView([
               new AMap.Marker({
                 position: [pos.coords.longitude, pos.coords.latitude],
