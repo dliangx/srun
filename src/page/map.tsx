@@ -8,25 +8,33 @@ import {
   Position,
 } from '@tauri-apps/plugin-geolocation';
 
-
 const MMap = () => {
   const [map, setMap] = React.useState<AMap.Map | null>(null);
   const mapContainer = useRef(null);
   const [pos, setPos] = React.useState<Position | null>(null);
 
   async function convertGPSToAMapCoords(lng: number, lat: number) {
-    return new Promise<[ lng: number, lat: number ]>((resolve, reject) => {
-      AMap.convertFrom([lng, lat], 'gps', (status: string, result: any) => {
-        if (status === 'complete' && result.info === 'ok') {
-          const { lng, lat } = result.locations[0];
-          resolve([ lng, lat ]);
-        } else {
-          reject(
-            new Error('Failed to convert GPS coordinates to AMap coordinates')
-          );
-        }
-      });
+    const url = 'https://restapi.amap.com/v3/assistant/coordinate/convert';
+    const params = new URLSearchParams({
+      locations: `${lng},${lat}`,
+      coordsys: 'gps',
+      key: '2f885069bed27bb2f4d656cdd5f22dd7', // Replace with your actual AMap API key
     });
+
+    try {
+      const response = await fetch(`${url}?${params.toString()}`);
+      const data = await response.json();
+      if (data.status === '1' && data.locations) {
+        const [convertedLng, convertedLat] = data.locations.split(',');
+        return [parseFloat(convertedLng), parseFloat(convertedLat)];
+      } else {
+        throw new Error(
+          'Failed to convert GPS coordinates to AMap coordinates'
+        );
+      }
+    } catch (error) {
+      throw new Error('Failed to convert GPS coordinates to AMap coordinates');
+    }
   }
 
   async function getPos() {
@@ -40,25 +48,32 @@ const MMap = () => {
     if (permissions.location === 'granted') {
       let pos = await getCurrentPosition();
       console.log(pos);
-      map?.setFitView([
-        new AMap.Marker({
-          position: [pos.coords.longitude, pos.coords.latitude],
-        }),
-      ]);
+      convertGPSToAMapCoords(pos.coords.longitude, pos.coords.latitude).then(
+        (res) => {
+          map?.setCenter([res[0], res[1]]);
+
+        }
+      );
+
       setPos(pos);
       await watchPosition(
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
         async (pos) => {
           console.log(pos);
+
+          setPos(pos);
           if (pos) {
-            const transPos = convertGPSToAMapCoords(pos.coords.longitude,pos.coords.latitude)
-            console.log(transPos)
-            map?.setFitView([
-              new AMap.Marker({
-                position: [pos.coords.longitude, pos.coords.latitude],
-              }),
-            ]);
-            setPos(pos);
+            await convertGPSToAMapCoords(
+              pos.coords.longitude,
+              pos.coords.latitude
+            ).then((res) => {
+              console.log(res);
+              map?.setFitView([
+                new AMap.Marker({
+                  position: [res[0], res[1]],
+                }),
+              ]);
+            });
           }
         }
       );
@@ -76,7 +91,6 @@ const MMap = () => {
           zoom: 19,
           expandZoomRange: true,
           zooms: [3, 21],
-          center: [114.305393, 30.593099], // Wuhan GPS coordinates
         });
 
         setMap(map);
